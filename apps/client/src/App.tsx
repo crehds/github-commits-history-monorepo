@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react';
 import './App.css';
-import { Commit } from './dto/commits.dto';
+import { useGetCommits } from './hooks/useGetCommits';
 
 function App() {
-  const [commits, setCommits] = useState<Commit[]>([]);
-  useEffect(() => {
-    fetch('/api/commits/crehds/github-commits-history-monorepo')
-      .then((res) => res.json())
-      .then((data) => setCommits(data));
-  });
+  const commits = useGetCommits();
   return (
     <main>
       <h1>Commits</h1>
