@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx turbo dev",
     "build": "turbo build",
-    "start": "node apps/api/dist/main.js"
+    "start": "node apps/api/dist/main.js",
+    "test": "turbo test"
   },
   "keywords": [],
   "author": "",
