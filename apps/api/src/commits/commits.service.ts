@@ -39,4 +39,19 @@ export class CommitsService {
       throw new Error(error.message);
     }
   }
+
+  async getOne(owner: string, repo: string, sha: string) {
+    try {
+      const commit = await this.octokit.repos.getCommit({
+        owner,
+        repo,
+        ref: sha,
+      });
+
+      return commit.data;
+    } catch (error) {
+      console.error(error);
+      throw new Error(error.message);
+    }
+  }
 }

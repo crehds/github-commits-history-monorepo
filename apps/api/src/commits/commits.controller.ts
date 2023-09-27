@@ -25,4 +25,13 @@ export class CommitsController {
       until,
     );
   }
+
+  @Get(':owner/:repo/:sha')
+  findOne(
+    @Param('owner') owner: string,
+    @Param('repo') repo: string,
+    @Param('sha') sha: string,
+  ) {
+    return this.commitsService.getOne(owner, repo, sha);
+  }
 }
