@@ -40,12 +40,20 @@ export class CommitsService {
     }
   }
 
-  async getOne(owner: string, repo: string, sha: string) {
+  async getOne(
+    owner: string,
+    repo: string,
+    sha: string,
+    page?: number,
+    perPage?: number,
+  ) {
     try {
       const commit = await this.octokit.repos.getCommit({
         owner,
         repo,
         ref: sha,
+        per_page: perPage,
+        page,
       });
 
       return commit.data;

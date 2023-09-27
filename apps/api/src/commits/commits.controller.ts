@@ -31,7 +31,9 @@ export class CommitsController {
     @Param('owner') owner: string,
     @Param('repo') repo: string,
     @Param('sha') sha: string,
+    @Query('page') page: number,
+    @Query('perPage') perPage: number,
   ) {
-    return this.commitsService.getOne(owner, repo, sha);
+    return this.commitsService.getOne(owner, repo, sha, page, perPage);
   }
 }
