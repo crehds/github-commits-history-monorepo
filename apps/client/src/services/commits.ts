@@ -1,5 +1,12 @@
-const API = '/api/commits/crehds/';
+import { Filters } from "../dto/filters.dto";
 
-export const getCommitsRequest = (repo: string) => {
-  return fetch(`${API}/${repo}`);
+const API = '/api/commits/crehds';
+
+export const getCommitsRequest = (repo: string, filters: Filters) => {
+
+  const searchParams = new URLSearchParams();
+
+  searchParams.append('perPage', filters.perPage.toString());
+
+  return fetch(`${API}/${repo}?${searchParams.toString()}`);
 };
