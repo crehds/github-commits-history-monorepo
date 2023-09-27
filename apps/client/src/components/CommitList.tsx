@@ -1,4 +1,5 @@
 import { useGetCommits } from "../hooks/useGetCommits";
+import CommitItem from "./CommitItem";
 
 function CommitList() {
   const commits = useGetCommits();
@@ -7,9 +8,7 @@ function CommitList() {
       <h1 className="tracking-wide text-5xl">Commits</h1>
       <ul>
         {commits.map((commit) => (
-          <li key={commit.sha}>
-            {commit.commit.message}
-          </li>
+          <CommitItem key={commit.sha} commit={commit} />
         ))}
       </ul>
     </div>
