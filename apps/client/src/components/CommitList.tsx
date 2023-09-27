@@ -3,8 +3,8 @@ import { useGetCommits } from "../hooks/useGetCommits";
 function CommitList() {
   const commits = useGetCommits();
   return (
-    <>
-    <h1>Commits</h1>
+    <div className="flex flex-col justify-center gap-3">
+      <h1 className="tracking-wide text-5xl">Commits</h1>
       <ul>
         {commits.map((commit) => (
           <li key={commit.sha}>
@@ -12,7 +12,7 @@ function CommitList() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 
