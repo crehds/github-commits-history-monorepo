@@ -13,11 +13,24 @@ export class CommitsService {
     });
   }
 
-  async getAll(owner: string, repo: string) {
+  async getAll(
+    owner: string,
+    repo: string,
+    perPage?: number,
+    page?: number,
+    sha?: string,
+    since?: string,
+    until?: string,
+  ) {
     try {
       const commits = await this.octokit.repos.listCommits({
         owner,
         repo,
+        sha,
+        since,
+        until,
+        per_page: perPage,
+        page,
       });
 
       return commits.data;
