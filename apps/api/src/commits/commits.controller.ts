@@ -9,11 +9,11 @@ export class CommitsController {
   findAll(
     @Param('owner') owner: string,
     @Param('repo') repo: string,
+    @Query('perPage') perPage: number,
+    @Query('page') page: number,
     @Query('sha') sha: string,
     @Query('since') since: string,
     @Query('until') until: string,
-    @Query('perPage') perPage: number,
-    @Query('page') page: number,
   ) {
     return this.commitsService.getAll(
       owner,
