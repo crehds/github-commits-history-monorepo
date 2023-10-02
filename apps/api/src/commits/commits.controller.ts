@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param, Query, ValidationPipe } from '@nestjs/common';
 import { CommitsService } from './commits.service';
 
 @Controller('commits')
@@ -8,7 +8,7 @@ export class CommitsController {
   @Get(':owner/:repo')
   findAll(
     @Param() params: { owner: string; repo: string },
-    @Query()
+    @Query(new ValidationPipe({ skipUndefinedProperties: true }))
     query: {
       perPage?: number;
       page?: number;
