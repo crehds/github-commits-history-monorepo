@@ -37,7 +37,11 @@ export class CommitsController {
   @Get(':owner/:repo/:sha')
   findOne(
     @Param() params: { owner: string; repo: string; sha: string },
-    @Query() query: { perPage?: number; page?: number },
+    @Query(
+      new ValidationPipe({ skipUndefinedProperties: true }),
+      new FilterQueryPipe(),
+    )
+    query: { perPage?: number; page?: number },
   ) {
     const { owner, repo, sha } = params;
     const { perPage = 10, page = 1 } = query;
