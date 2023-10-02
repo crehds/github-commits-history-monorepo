@@ -22,10 +22,10 @@ function CommitItem({commit}: Props) {
 
   return (
     <div className="border rounded-lg shadow-md p-4 mb-4">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-3">
         <h3 className="text-lg font-medium">{commit.commit.message}</h3>
         <button
-          className="text-blue-500 hover:text-gray-500 focus:outline-none focus:underline focus:text-gray-300 transition duration-250 ease-in-out"
+          className="text-blue-500 hover:text-gray-500 focus:outline-none focus:underline focus:text-gray-300 transition duration-250 ease-in-out p-2"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           {isExpanded ? "Hide" : "Show"}
