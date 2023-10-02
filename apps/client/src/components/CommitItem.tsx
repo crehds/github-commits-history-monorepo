@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Commit } from "../dto/commits.dto";
+import { useCallback, useEffect, useState } from "react";
+import { Commit, CommitDetails } from "../dto/commits.dto";
+import { getCommitDetailsRequest } from "../services/commits";
 
 interface Props {
   commit: Commit;
@@ -7,6 +8,17 @@ interface Props {
 
 function CommitItem({commit}: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [commitDetails, setCommitDetails] = useState<CommitDetails>({ sha: '', files: []});
+
+  const getCommitDetails = useCallback(async () => {
+    const response = await getCommitDetailsRequest('github-commits-history-monorepo', commit.sha);
+    const data = await response.json();
+    setCommitDetails(data);
+  }, [commit]);
+
+  useEffect(() => {
+    if (isExpanded) getCommitDetails();
+  }, [isExpanded, getCommitDetails]);
 
   return (
     <div className="border rounded-lg shadow-md p-4 mb-4">
@@ -21,11 +33,24 @@ function CommitItem({commit}: Props) {
       </div>
       {
         isExpanded && (
-          <div className="mt-4">
-            <p className="text-blue-600">{commit.sha}</p>
-            <p className="text-blue-600">{commit.commit.author.name}</p>
-            <p className="text-blue-600">{commit.commit.author.email}</p>
-            <p className="text-blue-600">{commit.commit.author.date}</p>
+          <div className="flex mt-4 justify-around">
+            <div className="flex flex-col gap-2">
+                <h3 className="font-bold">General information</h3>
+                <p className="text-blue-600">{commit.sha}</p>
+                <p className="text-blue-600">{commit.commit.author.name}</p>
+                <p className="text-blue-600">{commit.commit.author.email}</p>
+                <p className="text-blue-600">{commit.commit.author.date}</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3 className="font-bold">Changes</h3>
+              {commitDetails.files.map((commitDetail) => (
+                <div key={commitDetail.sha} className="border border-solid border-gray-500 rounded-md p-2">
+                  <div className="flex gap-2"><p className="font-bold">File</p> {commitDetail.filename}</div>
+                  <div className="flex gap-2"><p className="font-bold">Status</p> {commitDetail.status}</div>
+                  <div className="flex gap-2"><p className="font-bold">Lines</p> {commitDetail.changes} | + {commitDetail.additions} | - {commitDetail.deletions}</div>
+                </div>
+                ))}
+            </div>
           </div>
         )
       }

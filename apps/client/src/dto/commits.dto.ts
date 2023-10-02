@@ -13,3 +13,18 @@ export interface Commit {
     avatar_url: string;
   }
 }
+
+export interface CommitFiles {
+  sha: string;
+  filename: string;
+  status: string;
+  additions: number;
+  deletions: number;
+  changes: number;
+}
+
+
+export interface CommitDetails {
+  sha: string;
+  files: CommitFiles[];
+}

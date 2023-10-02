@@ -12,3 +12,7 @@ export const getCommitsRequest = (repo: string, filters: Filters) => {
 
   return fetch(`${API}/${repo}?${searchParams.toString()}`);
 };
+
+export const getCommitDetailsRequest = (repo: string, sha: string) => {
+  return fetch(`${API}/${repo}/${sha}`);
+};
