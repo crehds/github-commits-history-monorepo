@@ -1,5 +1,11 @@
 # Commit History App
 
+# Requeriments
+
+- Node.js v16 or greater
+- npm v7 or greater
+- git v2.25 or greater
+
 ## Description
 
 This project will show all the commits of a repository, using the GitHub API.
