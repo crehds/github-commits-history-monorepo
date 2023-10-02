@@ -28,7 +28,7 @@ It is necessary to have a GitHub token to be able to use the GitHub API. So, you
     npm run build
   ```
 
-4. Create a .env file and copy the token in the file
+4. Create a .env file under src folder and copy the token in the file
 
   ```bash
     touch .env # command to create the file, if you are using a linux based system
