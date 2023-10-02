@@ -33,7 +33,7 @@ function CommitItem({commit}: Props) {
       </div>
       {
         isExpanded && (
-          <div className="flex mt-4 justify-around">
+          <div className="flex mt-4 justify-around gap-3">
             <div className="flex flex-col gap-2">
                 <h3 className="font-bold">General information</h3>
                 <p className="text-blue-600">{commit.sha}</p>
