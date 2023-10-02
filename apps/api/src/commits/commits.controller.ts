@@ -7,14 +7,18 @@ export class CommitsController {
 
   @Get(':owner/:repo')
   findAll(
-    @Param('owner') owner: string,
-    @Param('repo') repo: string,
-    @Query('perPage') perPage: number,
-    @Query('page') page: number,
-    @Query('sha') sha: string,
-    @Query('since') since: string,
-    @Query('until') until: string,
+    @Param() params: { owner: string; repo: string },
+    @Query()
+    query: {
+      perPage?: number;
+      page?: number;
+      sha?: string;
+      since?: string;
+      until?: string;
+    },
   ) {
+    const { owner, repo } = params;
+    const { perPage = 10, page = 1, sha = 'main', since, until } = query;
     return this.commitsService.getAll(
       owner,
       repo,
@@ -28,12 +32,11 @@ export class CommitsController {
 
   @Get(':owner/:repo/:sha')
   findOne(
-    @Param('owner') owner: string,
-    @Param('repo') repo: string,
-    @Param('sha') sha: string,
-    @Query('page') page: number,
-    @Query('perPage') perPage: number,
+    @Param() params: { owner: string; repo: string; sha: string },
+    @Query() query: { perPage?: number; page?: number },
   ) {
+    const { owner, repo, sha } = params;
+    const { perPage = 10, page = 1 } = query;
     return this.commitsService.getOne(owner, repo, sha, page, perPage);
   }
 }
