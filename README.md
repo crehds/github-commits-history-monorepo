@@ -1,6 +1,6 @@
 # Commit History App
 
-# Requeriments
+## Requirements
 
 - Node.js v16 or greater
 - npm v7 or greater
