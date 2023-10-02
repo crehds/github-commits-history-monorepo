@@ -26,15 +26,19 @@ describe('CommitsController', () => {
       const since = '2023-09-20';
       const until = '2023-09-28';
 
-      const result = await controller.findAll(
+      const params = {
         owner,
         repo,
+      };
+
+      const query = {
         perPage,
         page,
         sha,
         since,
         until,
-      );
+      };
+      const result = await controller.findAll(params, query);
 
       expect(result).toHaveLength(perPage);
     });
@@ -48,7 +52,18 @@ describe('CommitsController', () => {
       const perPage = 10;
       const page = 1;
 
-      const result = await controller.findOne(owner, repo, sha, perPage, page);
+      const params = {
+        owner,
+        repo,
+        sha,
+      };
+
+      const query = {
+        perPage,
+        page,
+      };
+
+      const result = await controller.findOne(params, query);
 
       expect(result).toHaveProperty('author.login', 'crehds');
     });
