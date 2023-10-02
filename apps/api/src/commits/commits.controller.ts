@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query, ValidationPipe } from '@nestjs/common';
 import { CommitsService } from './commits.service';
-import { FilterQueryPipe } from 'src/pipes/filter.pipe';
+import { FilterQueryPipe } from '../pipes/filter.pipe';
 
 @Controller('commits')
 export class CommitsController {
