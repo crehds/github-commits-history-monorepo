@@ -4,7 +4,7 @@ import CommitItem from "./CommitItem";
 import FiltersList from "./FiltersList";
 
 function CommitList() {
-  const {commits, handleCommits} = useGetCommits();
+  const {commits, isLoading, error, handleCommits} = useGetCommits();
   const onFilter = (filters: Filters) => {
     handleCommits(filters);
   };
@@ -13,6 +13,8 @@ function CommitList() {
     <div className="flex flex-col justify-center gap-3">
       <h1 className="tracking-wide text-5xl">Commits</h1>
       <FiltersList onFilter={onFilter} />
+      {isLoading && <p>Loading...</p>}
+      {error ? <p>Error</p> : null}
       <ul>
         {commits.map((commit) => (
           <CommitItem key={commit.sha} commit={commit} />
